@@ -1,6 +1,4 @@
 <script>
-  import '../app.css';
-
   const balls = [
     { genreName: 'Rock', color: 'bg-red-500', dimensions: 'h-24 w-24' },
     { genreName: 'Rap', color: 'bg-blue-500', dimensions: 'h-80 w-80' },
@@ -10,10 +8,10 @@
   ];
 </script>
 
-<section class="h-full grid items-end overflow-hidden">
-  <div class="flex items-end h-full w-full">
+<section class="grid h-full items-end overflow-hidden">
+  <div class="flex h-full w-full items-end">
     {#each balls as ball}
-      <div class="{ball.color} {ball.dimensions} rounded-full grid place-items-center">
+      <div class="{ball.color} {ball.dimensions} grid place-items-center rounded-full">
         {ball.genreName}
       </div>
     {/each}
