@@ -11,7 +11,7 @@ export default function generateStickers() {
   const shuffledColors = shuffle(colors);
 
   for (let i = 0; i < numberOfStickers; i++) {
-    const large = random(0, 10) > 5;
+    const large = random(0, 100) > 50;
 
     stickers.push({
       component: IconWrapper,
