@@ -1,5 +1,7 @@
-<script>
+<script lang="ts">
+  import { signIn, signOut } from '@auth/sveltekit/client';
   import SpotifyIcon from '$lib/icons/SpotifyIcon.svelte';
+  import { page } from '$app/stores';
 </script>
 
 <header class="grid items-center p-8">
@@ -14,12 +16,23 @@
       >
         Hva er Synk?
       </button>
-      <button
-        class="flex h-12 items-center gap-4 rounded-xl bg-black px-4 py-3 text-white transition-transform hover:scale-105"
-      >
-        <SpotifyIcon size={24} />
-        <span>Logg inn</span>
-      </button>
+
+      {#if $page.data.session}
+        <button
+          class="flex h-12 items-center gap-4 rounded-xl bg-black px-4 py-3 text-white transition-transform hover:scale-105"
+          on:click={() => signOut()}
+        >
+          <span>Logg ut</span>
+        </button>
+      {:else}
+        <button
+          class="flex h-12 items-center gap-4 rounded-xl bg-black px-4 py-3 text-white transition-transform hover:scale-105"
+          on:click={() => signIn('spotify', { callbackUrl: '/' })}
+        >
+          <SpotifyIcon size={24} />
+          <span>Logg inn</span>
+        </button>
+      {/if}
     </div>
   </nav>
 </header>
