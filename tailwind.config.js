@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-beige': '#F1EDDF'
+        'brand-beige': '#F1EDDF',
+        'danger-red': '#B23A3A'
+      },
+      boxShadow: {
+        bottom: '0 4px 20px rgba(0, 0, 0, 0.1)'
       }
     }
   },
