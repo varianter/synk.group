@@ -2,6 +2,7 @@
   import { signIn, signOut } from '@auth/sveltekit/client';
   import SpotifyIcon from '$lib/icons/SpotifyIcon.svelte';
   import { page } from '$app/stores';
+  import SlideInWrapper from '$lib/SlideInWrapper.svelte';
 </script>
 
 <header class="grid items-center p-8">
@@ -11,11 +12,23 @@
     </div>
 
     <div class="flex items-center gap-x-4 text-lg font-semibold">
-      <button
-        class="grid h-12 place-content-center rounded-xl px-4 py-3 hover:bg-black hover:bg-opacity-[8%]"
-      >
-        Hva er Synk?
-      </button>
+      <SlideInWrapper fromRight>
+        <button
+          class="grid h-12 place-content-center rounded-xl px-4 py-3 hover:bg-black hover:bg-opacity-[8%]"
+          let:toggleSlideIn
+          on:click={toggleSlideIn}
+          slot="button"
+        >
+          Hva er Synk?
+        </button>
+        <div slot="content" class="flex flex-col gap-4 p-4">
+          <h1 class="text-wonky text-2xl font-bold">Hei, du!</h1>
+          <p class="text-base font-normal">
+            Synk gir oversikt over den mest populære musikken gruppen din hører
+            på. Bare logg inn med Spotify-kontoen din, og du er i gang!
+          </p>
+        </div>
+      </SlideInWrapper>
 
       {#if $page.data.session}
         <button
