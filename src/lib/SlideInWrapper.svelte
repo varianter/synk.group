@@ -6,6 +6,10 @@
   export let fromRight = false;
   let duration = 300;
   let showSlideIn = false;
+
+  function closeOnEsc(e) {
+    if (e.key === 'Escape') showSlideIn = false;
+  }
 </script>
 
 <slot name="button" toggleSlideIn={() => (showSlideIn = !showSlideIn)}>
@@ -17,6 +21,9 @@
   </button>
 </slot>
 
+<!-- Close on Escape. -->
+<svelte:body on:keydown={closeOnEsc} />
+
 {#if showSlideIn}
   <div
     on:mousedown={() => (showSlideIn = false)}
@@ -24,8 +31,7 @@
     class="absolute left-0 top-0 z-40 h-full w-full bg-black opacity-60"
   />
   <div
-    in:fly={{ x: fromRight ? '100%' : '-100%', duration }}
-    out:fly={{ x: fromRight ? '100%' : '-100%', duration }}
+    transition:fly={{ x: fromRight ? '100%' : '-100%', duration }}
     use:focusTrap
     class="absolute top-5 z-50 flex h-[95vh] items-start gap-4"
     class:left-5={!fromRight}
