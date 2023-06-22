@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model recentlyplayed {
+  userid   String
+  playedat DateTime @db.Timestamp(6)
+  trackid  String
+  users    users    @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([userid, playedat, trackid], map: "primary")
+}
+
+model tokens {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userid       String?
+  accesstoken  String
+  refreshtoken String
+  expiresat    DateTime @db.Timestamp(6)
+  users        users?   @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model users {
+  id             String           @id
+  lastsync       DateTime?        @db.Timestamp(6)
+  recentlyplayed recentlyplayed[]
+  tokens         tokens[]
+}
