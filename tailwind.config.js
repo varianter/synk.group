@@ -8,7 +8,8 @@ export default {
         'danger-red': '#B23A3A'
       },
       boxShadow: {
-        bottom: '0 4px 20px rgba(0, 0, 0, 0.1)'
+        bottom: '0 4px 20px rgba(0, 0, 0, 0.1)',
+        'inset-top': 'inset 0px 4px 20px rgba(0, 0, 0, 0.1)'
       }
     }
   },

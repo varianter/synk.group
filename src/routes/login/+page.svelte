@@ -1,6 +1,6 @@
 <script lang="ts">
   import LoginHeader from '$lib/login/LoginHeader.svelte';
-  import generateStickers from '$lib/utils/generateStickers';
+  import generateStickers from '$lib/utils/generate-stickers';
   import random from '$lib/utils/random';
   import { fly } from 'svelte/transition';
   import { onMount } from 'svelte';

@@ -1,20 +1,29 @@
 <script lang="ts">
   import UserIcon from '$lib/icons/UserIcon.svelte';
-  import { MenuIcon } from 'svelte-feather-icons';
-  const date = new Date();
-  const options: any = { weekday: 'long', day: 'numeric', month: 'long' };
-  const formattedDate = date.toLocaleDateString('nb-NO', options);
+  import SlideInWrapper from '$lib/SlideInWrapper.svelte';
+  import MainNavigation from '$lib/MainNavigation.svelte';
 
-  export let toggleMenu = () => {};
+  const date = new Date();
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  };
+  const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
 <header class="grid items-center p-8 text-3xl">
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-12">
-      <button on:click={toggleMenu} class="rounded-xl p-3 transition hover:bg-black/10">
-        <MenuIcon size="20" />
-      </button>
-      <div><span class="font-medium">Synk.</span>Variant</div>
+      <SlideInWrapper>
+        <MainNavigation slot="content" />
+      </SlideInWrapper>
+
+      <div>
+        <span class="font-medium">Synk.</span>
+        <!-- Auto-formatting adds a whitespace, offset with margin. -->
+        <span class="-ml-2">Variant</span>
+      </div>
     </div>
 
     <div class="flex items-center gap-x-12">
