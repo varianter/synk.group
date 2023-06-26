@@ -36,9 +36,12 @@ export const handle: Handle = sequence(
     ],
     debug: NODE_ENV !== 'production',
     callbacks: {
-      async signIn({ user, account, profile, email, credentials }) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
+      async signIn({ user, account }) {
+        console.log('USER', user);
+        console.log('ACCOUNT', account);
+        
+        if (!account) return false;
+
         const { access_token, refresh_token } = account;
 
         const prisma = new PrismaClient();
@@ -55,13 +58,15 @@ export const handle: Handle = sequence(
           }
         });
 
-        await prisma.tokens.create({
-          data: {
-            access_token,
-            refresh_token,
-            user_id: createdUser.id
-          }
-        });
+        if (access_token && refresh_token) {
+          await prisma.tokens.create({
+            data: {
+              access_token,
+              refresh_token,
+              user_id: createdUser.id
+            }
+          });
+        }
 
         return true;
       }
@@ -69,9 +74,3 @@ export const handle: Handle = sequence(
   }),
   authorization
 );
-
-function getExpiresAt() {
-  const expiresAt = new Date();
-  expiresAt.setSeconds(expiresAt.getSeconds() + 3600);
-  return expiresAt;
-}
