@@ -33,7 +33,7 @@
   <div
     transition:fly={{ x: fromRight ? '100%' : '-100%', duration }}
     use:focusTrap
-    class="absolute top-5 z-50 flex h-[95vh] items-start gap-4"
+    class="absolute top-5 z-50 flex h-[calc(100vh-2.5rem)] items-start gap-4"
     class:left-5={!fromRight}
     class:right-5={fromRight}
     class:flex-row-reverse={fromRight}
