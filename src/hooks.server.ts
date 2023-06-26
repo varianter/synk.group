@@ -36,10 +36,7 @@ export const handle: Handle = sequence(
     ],
     debug: NODE_ENV !== 'production',
     callbacks: {
-      async signIn({ user, account }) {
-        console.log('USER', user);
-        console.log('ACCOUNT', account);
-        
+      async signIn({ account }) {
         if (!account) return false;
 
         const { access_token, refresh_token } = account;
@@ -47,9 +44,9 @@ export const handle: Handle = sequence(
         const prisma = new PrismaClient();
 
         const createdUser = await prisma.users.upsert({
-          where: { id: user.id },
+          where: { id: account.providerAccountId },
           create: {
-            id: user.id,
+            id: account.providerAccountId,
             last_sync: null
           },
           update: {},
