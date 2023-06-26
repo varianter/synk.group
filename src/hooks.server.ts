@@ -47,7 +47,7 @@ export const handle: Handle = sequence(
           where: { id: user.id },
           create: {
             id: user.id,
-            lastsync: null
+            last_sync: null
           },
           update: {},
           select: {
@@ -57,10 +57,9 @@ export const handle: Handle = sequence(
 
         await prisma.tokens.create({
           data: {
-            accesstoken: access_token,
-            refreshtoken: refresh_token,
-            expiresat: getExpiresAt(),
-            userid: createdUser.id
+            access_token,
+            refresh_token,
+            user_id: createdUser.id
           }
         });
 

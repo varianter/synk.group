@@ -7,27 +7,67 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model recentlyplayed {
-  userid   String
-  playedat DateTime @db.Timestamp(6)
-  trackid  String
-  users    users    @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@id([userid, playedat, trackid], map: "primary")
-}
-
 model tokens {
-  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  userid       String?
-  accesstoken  String
-  refreshtoken String
-  expiresat    DateTime @db.Timestamp(6)
-  users        users?   @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id       String?
+  access_token  String
+  refresh_token String
+  users         users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tokens_userid_fkey")
 }
 
 model users {
-  id             String           @id
-  lastsync       DateTime?        @db.Timestamp(6)
-  recentlyplayed recentlyplayed[]
-  tokens         tokens[]
+  id            String          @id
+  last_sync     DateTime?       @db.Timestamp(6)
+  played_tracks played_tracks[]
+  tokens        tokens[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model albums {
+  id            String   @id
+  name          String
+  image_url     String
+  vibrant_color String?
+  tracks        tracks[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model artists {
+  id            String          @id
+  name          String
+  image_url     String?
+  track_artists track_artists[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model played_tracks {
+  user_id   String
+  played_at DateTime @db.Timestamp(6)
+  track_id  String
+  users     users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "recentlyplayed_userid_fkey")
+  tracks    tracks   @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tracks_fk")
+
+  @@id([user_id, played_at, track_id], map: "primary")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model track_artists {
+  track_id  String
+  artist_id String
+  artists   artists @relation(fields: [artist_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_artistid_fkey")
+  tracks    tracks  @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_trackid_fkey")
+
+  @@id([track_id, artist_id], map: "primary")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model tracks {
+  id            String          @id
+  name          String
+  album_id      String
+  duration      BigInt
+  genre         String?
+  played_tracks played_tracks[]
+  track_artists track_artists[]
+  albums        albums          @relation(fields: [album_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tracks_album_fkey")
 }
