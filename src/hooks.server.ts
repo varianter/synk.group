@@ -55,6 +55,7 @@ export const handle: Handle = sequence(
           }
         });
 
+        // TODO: Overwrite tokens if they already exist
         if (access_token && refresh_token) {
           await prisma.tokens.upsert({
             where: { user_id: createdUser.id },
