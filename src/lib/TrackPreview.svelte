@@ -10,8 +10,6 @@
 
   const hoveringPreview = writable(false);
 
-  $: console.log($hoveringPreview);
-
   let showNumber = false;
 
   onMount(() => {
