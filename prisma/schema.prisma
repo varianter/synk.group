@@ -8,18 +8,20 @@ datasource db {
 }
 
 model tokens {
-  id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id       String?
+  id            String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id       String @unique(map: "tokens_userid_pk")
   access_token  String
   refresh_token String
-  users         users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tokens_userid_fkey")
+  users         users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tokens_userid_fkey")
 }
 
 model users {
   id            String          @id
   last_sync     DateTime?       @db.Timestamp(6)
+  group_admins  group_admins[]
+  group_members group_members[]
   played_tracks played_tracks[]
-  tokens        tokens[]
+  tokens        tokens?
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -62,12 +64,70 @@ model track_artists {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model tracks {
-  id            String          @id
+  id             String           @id
+  name           String
+  album_id       String
+  duration       BigInt
+  genre          String?
+  played_tracks  played_tracks[]
+  playlist_items playlist_items[]
+  track_artists  track_artists[]
+  albums         albums           @relation(fields: [album_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tracks_album_fkey")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model group_admins {
+  group_id String @db.Uuid
+  user_id  String
+  groups   groups @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users    users  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([group_id, user_id], map: "primary")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model group_members {
+  group_id   String    @db.Uuid
+  user_id    String
+  entered_at DateTime  @default(now()) @db.Timestamp(6)
+  left_at    DateTime? @db.Timestamp(6)
+  groups     groups    @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users      users     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([group_id, user_id, entered_at], map: "primary")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model groups {
+  id            String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  group_id      String
   name          String
-  album_id      String
-  duration      BigInt
-  genre         String?
-  played_tracks played_tracks[]
-  track_artists track_artists[]
-  albums        albums          @relation(fields: [album_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "tracks_album_fkey")
+  creation_time DateTime?       @default(now()) @db.Timestamp(6)
+  group_admins  group_admins[]
+  group_members group_members[]
+  playlists     playlists[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlist_items {
+  playlist_id                String    @db.Uuid
+  track_id                   String
+  number_of_plays            BigInt
+  number_of_unique_listeners BigInt
+  playlists                  playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  tracks                     tracks    @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([playlist_id, track_id], map: "primary")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model playlists {
+  id                  String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  group_id            String?          @db.Uuid
+  name                String
+  score               Float
+  is_current_top_list Boolean
+  creation_time       DateTime?        @default(now()) @db.Timestamp(6)
+  playlist_items      playlist_items[]
+  groups              groups?          @relation(fields: [group_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
