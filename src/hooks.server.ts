@@ -56,11 +56,16 @@ export const handle: Handle = sequence(
         });
 
         if (access_token && refresh_token) {
-          await prisma.tokens.create({
-            data: {
+          await prisma.tokens.upsert({
+            where: { user_id: createdUser.id },
+            create: {
+              user_id: createdUser.id,
               access_token,
-              refresh_token,
-              user_id: createdUser.id
+              refresh_token
+            },
+            update: {
+              access_token,
+              refresh_token
             }
           });
         }
