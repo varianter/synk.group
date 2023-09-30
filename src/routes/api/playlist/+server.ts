@@ -14,8 +14,25 @@ export async function GET({ url }: Request) {
     select: {
       id: true,
       name: true,
-      score: true
-      // TODO: Need color.
+      score: true,
+      playlist_items: {
+        select: {
+          number_of_plays: true,
+          tracks: {
+            select: {
+              albums: {
+                select: {
+                  vibrant_color: true
+                }
+              }
+            }
+          }
+        },
+        orderBy: {
+          score: 'desc'
+        },
+        take: 1
+      }
     },
     orderBy: {
       score: 'desc'
@@ -23,5 +40,22 @@ export async function GET({ url }: Request) {
     take: 11
   });
 
-  return new Response(JSON.stringify(playlists));
+  const mappedPlaylists = playlists.map((p) => {
+    return {
+      id: p.id,
+      name: p.name,
+      score: p.score,
+      color: p.playlist_items[0].tracks.albums.vibrant_color
+    };
+  });
+
+  return new Response(JSON.stringify(mappedPlaylists));
 }
+
+// To make BigInt work with JSON.stringify
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+BigInt.prototype.toJSON = function () {
+  const int = Number.parseInt(this.toString());
+  return int ?? this.toString();
+};

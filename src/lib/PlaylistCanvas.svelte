@@ -27,8 +27,11 @@
     return playlists.map((playlist) => ({
       x: startPositionX(45),
       y: startPositionY(45),
-      r: playlist.name === 'Top 10' ? 100 : 2000 * playlist.score,
-      color: playlist.name === 'Top 10' ? 'magenta' : 'blue',
+      r:
+        playlist.name === 'Top 10'
+          ? 100
+          : clamp(1200 * playlist.score, 60, 200),
+      color: playlist.color,
       vx: 0,
       vy: 5,
       mass: 1,
@@ -50,13 +53,11 @@
 
     // Draw a ball on the canvas
     function drawBall(ball) {
-      const strokeColor = 'black';
       const strokeWidth = 4;
       const innerRadius = ball.r - strokeWidth;
 
       // draw inner stroke
-      ctx.fillStyle =
-        selectedBall?.text === ball.text ? strokeColor : ball.color;
+      ctx.fillStyle = ball.color;
       ctx.beginPath();
       ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
       ctx.fill();
@@ -69,7 +70,7 @@
 
       // draw text
       ctx.fillStyle = 'white';
-      const fontSize = ball.r * 0.45; // adjust the percentage as needed
+      const fontSize = ball.r * 0.3; // adjust the percentage as needed
       ctx.font = `bold ${fontSize}px Fraunces`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
