@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import random from '$lib/utils/random';
   import clamp from '$lib/utils/clamp';
+  import { goto } from '$app/navigation';
 
   export let playlists = [];
 
@@ -18,10 +19,7 @@
   }
   function startPositionY(radius) {
     const r = random(-2000, -100, 50);
-    console.log('r', r);
-    const c = clamp(r, -2000, 0 - radius);
-    console.log('c', c);
-    return c;
+    return clamp(r, -2000, 0 - radius);
   }
   function createBalls() {
     return playlists.map((playlist) => ({
@@ -35,7 +33,8 @@
       vx: 0,
       vy: 5,
       mass: 1,
-      text: playlist.name
+      text: playlist.name,
+      id: playlist.id
     }));
   }
 
@@ -142,8 +141,8 @@
 
     // Handle ball clicks
     function handleBallClick(ball) {
-      console.log(ball.text);
-      // Do something with the clicked ball
+      // TOOD: Update to `/playlist/${ball.id}`
+      goto(`/${ball.id}`);
     }
 
     // Handle ball activation
@@ -247,7 +246,6 @@
   });
 
   function updateCanvasSize() {
-    console.log('resizind');
     const canvas = document.getElementById('myCanvas');
     canvas.width = clientWidth;
     canvas.height = clientHeight;
