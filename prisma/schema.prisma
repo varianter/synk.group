@@ -54,10 +54,11 @@ model played_tracks {
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model track_artists {
-  track_id  String
-  artist_id String
-  artists   artists @relation(fields: [artist_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_artistid_fkey")
-  tracks    tracks  @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_trackid_fkey")
+  track_id     String
+  artist_id    String
+  artist_order BigInt
+  artists      artists @relation(fields: [artist_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_artistid_fkey")
+  tracks       tracks  @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "trackartists_trackid_fkey")
 
   @@id([track_id, artist_id], map: "primary")
 }
@@ -114,6 +115,7 @@ model playlist_items {
   track_id                   String
   number_of_plays            BigInt
   number_of_unique_listeners BigInt
+  score                      Float
   playlists                  playlists @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   tracks                     tracks    @relation(fields: [track_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
