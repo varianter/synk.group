@@ -3,10 +3,11 @@
   import { PauseIcon, PlayIcon } from 'svelte-feather-icons';
   import { writable } from 'svelte/store';
   import { fade } from 'svelte/transition';
-  import type { Track } from './types';
+  import type { Track } from '$lib/types';
 
   export let track: Track;
   export let index: number;
+  export let className: string;
 
   const hoveringPreview = writable(false);
 
@@ -32,19 +33,13 @@
     if (progress === 1) return '0deg';
     return progress < 0.5 ? progress * 2 * 180 + 'deg' : '180deg';
   }
-  function randomPercent(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min + '%';
-  }
 </script>
 
 {#if showNumber}
-  <div transition:fade class="grow-1 h-full w-full">
+  <div transition:fade class="grow-1 flex h-full w-full items-end justify-end">
     <div
-      style="top: {randomPercent(10, 80)}; left: {randomPercent(
-        0,
-        60
-      )}; background-color: {track.color}"
-      class="relative grid h-40 w-40 place-content-center rounded-full text-5xl transition-opacity hover:cursor-pointer"
+      style="background-color: {track.color}"
+      class="{className}  relative grid h-40 w-40 place-content-center rounded-full text-5xl transition-all hover:cursor-pointer"
       on:mouseenter={() => {
         $hoveringPreview = true;
       }}
@@ -55,6 +50,7 @@
         if (audio.paused) {
           $hoveringPreview = false;
           audio.play();
+          audio.volume = 0.1;
         } else {
           $hoveringPreview = true;
           audio.pause();
@@ -64,7 +60,7 @@
         // TODO
       }}
     >
-      <audio bind:this={audio} bind:currentTime bind:duration>
+      <audio bind:this={audio} bind:currentTime bind:duration volume={50}>
         <source src={track.preview} type="audio/mpeg" />
       </audio>
 

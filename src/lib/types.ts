@@ -1,13 +1,26 @@
 export type Track = {
   title: string;
-  artist: {
+  artists: {
+    id: string;
     name: string;
-    image: string;
-  };
-  year: string;
+    image: string | null;
+    order: number;
+  }[];
+  releaseDate: string | null;
   duration: number;
-  genre: string;
-  preview: string;
-  coverart: string;
-  color: string;
+  genre: string | null;
+  preview: string | null;
+  coverart?: string;
+  color: string | null;
+  numberOfPlays: number;
 };
+
+export type Playlist = {
+  id: string;
+  name: string;
+  score: number;
+  color: string;
+  tracks: Track[];
+};
+
+export type PlaylistWithoutTracks = Omit<Playlist, 'tracks'>;

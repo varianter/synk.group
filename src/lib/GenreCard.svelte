@@ -1,41 +1,44 @@
 <script lang="ts">
-  import CircleSeparator from './icons/CircleSeparator.svelte';
-  import type { Track } from './types';
   import TrackPreview from './TrackPreview.svelte';
+  import GenreCardMetadata from './GenreCardMetadata.svelte';
+  import type { ComponentProps } from 'svelte';
+  import type { Track } from '$lib/types';
+  import _ from 'lodash';
 
   export let track: Track;
   export let index: number;
 
-  function prettyPrintDuration(duration: number): string {
-    const minutes = Math.floor(duration / 60);
-    const seconds = `${duration % 60}`.padStart(2, '0');
-
-    return `${minutes}:${seconds}`;
-  }
+  let metadataComponent: Omit<ComponentProps<GenreCardMetadata>, 'track'>;
 </script>
 
 <div
   style="--image-url: url({track.coverart})"
-  class="relative flex h-full w-[31.25rem] min-w-[31.25rem] flex-col items-start overflow-hidden rounded-3xl bg-[image:var(--image-url)] bg-cover bg-center bg-no-repeat p-4 hover:outline hover:outline-white"
+  class="group relative flex h-full w-[31.25rem] min-w-[31.25rem] flex-col items-start overflow-hidden rounded-3xl bg-[image:var(--image-url)] bg-cover bg-center bg-no-repeat p-4"
+  on:mouseenter={() => metadataComponent?.startScroll?.()}
+  on:mouseleave={() => metadataComponent?.stopScroll?.()}
 >
-  <p class="rounded-full bg-black px-3 py-0.5 font-sans font-normal text-white">{track.genre}</p>
+  <p class="rounded-full bg-black px-3 py-0.5 font-sans font-normal text-white">
+    {track.genre}
+  </p>
 
-  <TrackPreview {track} {index} />
+  <TrackPreview className="group-hover:mb-4" {track} {index} />
 
-  <div class="relative mt-auto w-full pt-14">
+  <div class="relative mt-auto w-full">
     <div
-      class="absolute left-0 top-0 h-[calc(100%+1rem)] w-[calc(100%+2rem)] -translate-x-4 bg-gradient-to-t from-black to-transparent"
-    />
+      style="background-color: {track.color}"
+      class="relative z-10 col-span-full row-span-full flex w-full flex-col gap-4 rounded-xl p-4 transition-all group-hover:mb-14"
+    >
+      <p class="text-xl font-normal text-white/70">
+        {_.sortBy(track.artists, 'order')
+          .map((artist) => artist.name)
+          .join(', ')}
+      </p>
 
-    <p class="text-wonky relative mx-4 mb-4 break-words text-5xl leading-tight">{track.title}</p>
-
-    <div class="relative m-4 flex items-center gap-1.5 font-sans text-lg font-normal">
-      <img src={track.artist.image} alt="" class="mr-0.5 rounded-full" height="24" width="24" />
-      <span>{track.artist.name}</span>
-      <CircleSeparator />
-      <span class="text-white text-opacity-70">{track.year}</span>
-      <CircleSeparator />
-      <span class="text-white text-opacity-70">{prettyPrintDuration(track.duration)}</span>
+      <p class="text-wonky relative break-words text-5xl leading-tight">
+        {track.title}
+      </p>
     </div>
+
+    <GenreCardMetadata {track} bind:this={metadataComponent} />
   </div>
 </div>

@@ -10,9 +10,9 @@
 <header class="text-wonky grid items-center p-8 pb-4 text-3xl">
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-8">
-      <button class="rounded-xl p-3 transition hover:bg-black/10">
+      <a class="rounded-xl p-3 transition hover:bg-black/10" href="/">
         <ArrowLeftIcon size="20" />
-      </button>
+      </a>
       <div>{genre}</div>
     </div>
 
