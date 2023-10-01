@@ -1,9 +1,13 @@
 <script lang="ts">
   import { ArrowLeftIcon } from 'svelte-feather-icons';
-  export let genre: string;
+  export let playlistName: string;
 
   const date = new Date();
-  const options: any = { weekday: 'long', day: 'numeric', month: 'long' };
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  };
   const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
@@ -13,7 +17,7 @@
       <a class="rounded-xl p-3 transition hover:bg-black/10" href="/">
         <ArrowLeftIcon size="20" />
       </a>
-      <div>{genre}</div>
+      <div>{playlistName}</div>
     </div>
 
     <div class="text flex items-center gap-x-12 font-light text-white">

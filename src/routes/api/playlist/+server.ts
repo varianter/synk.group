@@ -81,7 +81,7 @@ export async function GET({ url }: Request) {
           duration: Number(tracks.duration),
           genre: tracks.genre,
           numberOfPlays: Number(number_of_plays),
-          color: tracks.albums.vibrant_color,
+          color: tracks.albums.vibrant_color ?? defaultColor,
           coverart: tracks.albums.image_url,
           preview: tracks.preview_url,
           releaseDate: tracks.albums.release_date,

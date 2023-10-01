@@ -1,6 +1,6 @@
 <script lang="ts">
   import TrackPreview from './TrackPreview.svelte';
-  import GenreCardMetadata from './GenreCardMetadata.svelte';
+  import PlaylistCardMetadata from './PlaylistCardMetadata.svelte';
   import type { ComponentProps } from 'svelte';
   import type { Track } from '$lib/types';
   import _ from 'lodash';
@@ -8,7 +8,7 @@
   export let track: Track;
   export let index: number;
 
-  let metadataComponent: Omit<ComponentProps<GenreCardMetadata>, 'track'>;
+  let metadataComponent: Omit<ComponentProps<PlaylistCardMetadata>, 'track'>;
 </script>
 
 <div
@@ -39,6 +39,6 @@
       </p>
     </div>
 
-    <GenreCardMetadata {track} bind:this={metadataComponent} />
+    <PlaylistCardMetadata {track} bind:this={metadataComponent} />
   </div>
 </div>
