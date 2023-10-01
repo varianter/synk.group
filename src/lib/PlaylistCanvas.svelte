@@ -254,6 +254,10 @@
 
 <svelte:window on:resize={updateCanvasSize} />
 
-<div class="h-full" bind:clientHeight bind:clientWidth>
+<div
+  class="absolute bottom-0 left-0 right-0 top-0"
+  bind:clientHeight
+  bind:clientWidth
+>
   <canvas id="myCanvas" style="" />
 </div>

@@ -12,7 +12,7 @@
   const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
-<header class="grid items-center p-8 text-3xl">
+<header class="z-10 grid items-center p-8 text-3xl">
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-12">
       <SlideInWrapper>
@@ -22,7 +22,7 @@
       <div>
         <span class="font-medium">Synk.</span>
         <!-- Auto-formatting adds a whitespace, offset with margin. -->
-        <span class="-ml-2">Variant</span>
+        <span class="-ml-2">Norge</span>
       </div>
     </div>
 

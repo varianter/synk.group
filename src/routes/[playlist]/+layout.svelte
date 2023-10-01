@@ -1,5 +1,5 @@
 <script lang="ts">
-  import GenreHeader from '$lib/GenreHeader.svelte';
+  import PlaylistHeader from '$lib/PlaylistHeader.svelte';
   import type { LayoutData } from './$types';
 
   export let data: LayoutData;
@@ -9,7 +9,7 @@
   style="background-color: {data.playlist.color}"
   class="flex h-full flex-col font-bold text-white"
 >
-  <GenreHeader genre={data.playlist.name} />
+  <PlaylistHeader playlistName={data.playlist.name} />
   <main class="grow-1 h-full">
     <slot />
   </main>

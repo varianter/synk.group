@@ -24,7 +24,7 @@
   ];
 </script>
 
-<h2 class="leading-0 p-8 pb-6 text-3xl font-medium">Hei, Variant</h2>
+<h2 class="leading-0 p-8 pb-6 text-3xl font-medium">Hei, Norge</h2>
 <div
   use:shadowOnScroll
   class="overflow-y-auto scroll-smooth p-4 pt-0 text-base"
