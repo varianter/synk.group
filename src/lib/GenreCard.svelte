@@ -1,8 +1,9 @@
 <script lang="ts">
-  import type { Track } from './types';
   import TrackPreview from './TrackPreview.svelte';
-  import GenreCardMetadata from '../GenreCardMetadata.svelte';
+  import GenreCardMetadata from './GenreCardMetadata.svelte';
   import type { ComponentProps } from 'svelte';
+  import type { Track } from '$lib/types';
+  import _ from 'lodash';
 
   export let track: Track;
   export let index: number;
@@ -24,10 +25,13 @@
 
   <div class="relative mt-auto w-full">
     <div
-      class="relative z-10 col-span-full row-span-full flex w-full flex-col gap-4 rounded-xl bg-green-600 p-4 transition-all group-hover:mb-14"
+      style="background-color: {track.color}"
+      class="relative z-10 col-span-full row-span-full flex w-full flex-col gap-4 rounded-xl p-4 transition-all group-hover:mb-14"
     >
       <p class="text-xl font-normal text-white/70">
-        {track.artist.name}
+        {_.sortBy(track.artists, 'order')
+          .map((artist) => artist.name)
+          .join(', ')}
       </p>
 
       <p class="text-wonky relative break-words text-5xl leading-tight">

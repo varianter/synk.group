@@ -30,6 +30,7 @@ model albums {
   name          String
   image_url     String
   vibrant_color String?
+  release_date  String?
   tracks        tracks[]
 }
 
@@ -70,6 +71,7 @@ model tracks {
   album_id       String
   duration       BigInt
   genre          String?
+  preview_url    String?
   played_tracks  played_tracks[]
   playlist_items playlist_items[]
   track_artists  track_artists[]

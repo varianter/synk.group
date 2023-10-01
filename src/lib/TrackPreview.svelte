@@ -3,7 +3,7 @@
   import { PauseIcon, PlayIcon } from 'svelte-feather-icons';
   import { writable } from 'svelte/store';
   import { fade } from 'svelte/transition';
-  import type { Track } from './types';
+  import type { Track } from '$lib/types';
 
   export let track: Track;
   export let index: number;

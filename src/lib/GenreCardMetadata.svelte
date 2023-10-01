@@ -35,32 +35,42 @@
     }, 250);
   }
 
-  function prettyPrintDuration(duration: number): string {
-    const minutes = Math.floor(duration / 60);
-    const seconds = `${duration % 60}`.padStart(2, '0');
+  function prettyPrintDuration(durationInMs: number): string {
+    const durationInSeconds = Math.floor(durationInMs / 1000);
+    const minutes = Math.floor(durationInSeconds / 60);
+    const seconds = `${durationInSeconds % 60}`.padStart(2, '0');
 
     return `${minutes}:${seconds}`;
   }
 </script>
 
 <div
-  class="absolute bottom-0 left-0 right-0 z-0 overflow-hidden rounded-b-xl bg-green-800"
+  style="background-color: {track.color}"
+  class="absolute bottom-0 left-0 right-0 z-0 overflow-hidden rounded-b-xl"
   bind:clientWidth={parentWidth}
 >
+  <!-- Overlay to darken the background color. -->
+  <div class="absolute bottom-0 left-0 right-0 top-0 bg-black/[0.16]" />
+
   <div
     class="flex w-[fit-content] items-center gap-1.5 whitespace-nowrap p-4 pt-8 font-sans text-lg font-normal"
     bind:clientWidth={metadataWidth}
     style="transform: translateX(-{$transformTween}px)"
   >
     <BarChart2Icon />
-    <span>870 avspillinger</span>
+
+    <span>{track.numberOfPlays} avspillinger</span>
+
     <CircleSeparator />
-    <span>24 avspillinger siste 7 dager</span>
+
+    <span class="text-white text-opacity-70">
+      Utgitt i {track.releaseDate?.substring(0, 4)}
+    </span>
+
     <CircleSeparator />
+
     <span class="text-white text-opacity-70">
       {prettyPrintDuration(track.duration)}
     </span>
-    <CircleSeparator />
-    <span>Hallo i luken i luken i luken</span>
   </div>
 </div>
