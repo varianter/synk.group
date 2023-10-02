@@ -2,6 +2,9 @@
   import UserIcon from '$lib/icons/UserIcon.svelte';
   import SlideInWrapper from '$lib/SlideInWrapper.svelte';
   import MainNavigation from '$lib/MainNavigation.svelte';
+  import type { Playlist } from '$lib/types';
+
+  export let playlists: Playlist[];
 
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
@@ -16,7 +19,7 @@
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-12">
       <SlideInWrapper>
-        <MainNavigation slot="content" />
+        <MainNavigation slot="content" {playlists} />
       </SlideInWrapper>
 
       <div>
