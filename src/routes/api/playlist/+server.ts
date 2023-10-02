@@ -67,33 +67,37 @@ export async function GET({ url }: Request) {
     }
   });
 
-  const mappedPlaylist: Playlist | null = playlist
-    ? {
-        id: playlist.id,
-        name: playlist.name,
-        score: playlist.score,
-        color:
-          _.first(playlist.playlist_items)?.tracks.albums.vibrant_color ??
-          defaultColor,
-        tracks: playlist.playlist_items.map(({ tracks, number_of_plays }) => ({
-          id: tracks.id,
-          title: tracks.name,
-          duration: Number(tracks.duration),
-          genre: tracks.genre,
-          numberOfPlays: Number(number_of_plays),
-          color: tracks.albums.vibrant_color ?? defaultColor,
-          coverart: tracks.albums.image_url,
-          preview: tracks.preview_url,
-          releaseDate: tracks.albums.release_date,
-          artists: tracks.track_artists.map(({ artists, artist_order }) => ({
-            id: artists.id,
-            name: artists.name,
-            order: Number(artist_order),
-            image: artists.image_url
-          }))
-        }))
-      }
-    : null;
+  if (!playlist) {
+    return new Response(
+      JSON.stringify({ error: true, message: 'Playlist not found' })
+    );
+  }
+
+  const mappedPlaylist: Playlist | null = {
+    id: playlist.id,
+    name: playlist.name,
+    score: playlist.score,
+    color:
+      _.first(playlist.playlist_items)?.tracks.albums.vibrant_color ??
+      defaultColor,
+    tracks: playlist.playlist_items.map(({ tracks, number_of_plays }) => ({
+      id: tracks.id,
+      title: tracks.name,
+      duration: Number(tracks.duration),
+      genre: tracks.genre,
+      numberOfPlays: Number(number_of_plays),
+      color: tracks.albums.vibrant_color ?? defaultColor,
+      coverart: tracks.albums.image_url,
+      preview: tracks.preview_url,
+      releaseDate: tracks.albums.release_date,
+      artists: tracks.track_artists.map(({ artists, artist_order }) => ({
+        id: artists.id,
+        name: artists.name,
+        order: Number(artist_order),
+        image: artists.image_url
+      }))
+    }))
+  };
 
   return new Response(JSON.stringify(mappedPlaylist));
 }

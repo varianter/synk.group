@@ -8,23 +8,44 @@
     UserPlusIcon
   } from 'svelte-feather-icons';
   import { shadowOnScroll } from '$lib/utils/directives';
-  import type { Playlist } from '$lib/types';
+  import type { GroupInfo, Playlist } from '$lib/types';
 
   export let playlists: Playlist[];
+  export let groupInfo: GroupInfo;
+
+  const options: Intl.DateTimeFormatOptions = {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+
+  function formatDate(date: string) {
+    return new Date(date).toLocaleDateString('nb-NO', options);
+  }
 </script>
 
-<h2 class="leading-0 p-8 pb-6 text-3xl font-medium">Hei, Norge</h2>
+<h2 class="leading-0 p-8 pb-6 text-3xl font-medium">Hei, {groupInfo.name}</h2>
 <div
   use:shadowOnScroll
   class="overflow-y-auto scroll-smooth p-4 pt-0 text-base"
 >
   <div>
     <div class="p-4 pt-0">
-      <p class="mb-4 leading-6">
-        Siden 2. april 2021 har gruppen vokst seg til 35 personer, og i løpet av
-        denne tiden har dere totalt hørt på 11232 låter. Deres mest spilte låt
-        er Kongen av campingplassen, som er blitt spilt 886 ganger. Nedenfor ser
-        du hvilke sjangere dere hører mest på akkurat nå.
+      <p class="mb-3 leading-6">
+        <span>
+          Siden {formatDate(groupInfo.creationDate)} har gruppen vokst seg til {groupInfo.numberOfMembers}
+          personer, og i løpet av denne tiden har dere totalt hørt på {groupInfo.numberOfTracks}
+          låter.
+        </span>
+        {#if groupInfo.favoriteTrack}
+          <span>
+            Deres mest spilte låt er {groupInfo.favoriteTrack.title}, som er
+            blitt spilt {groupInfo.favoriteTrack.numberOfPlays} ganger.
+          </span>
+        {/if}
+        <span>
+          Nedenfor ser du hvilke sjangere dere hører mest på akkurat nå.
+        </span>
       </p>
     </div>
     <nav>
@@ -49,7 +70,7 @@
         <li>
           <a
             href="/"
-            class="flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
           >
             <StarIcon />
             <span>Topp 20</span>
@@ -58,7 +79,7 @@
         <li>
           <a
             href="/"
-            class="flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
           >
             <UserPlusIcon />
             <span>Del gruppe</span>
@@ -67,7 +88,7 @@
         <li>
           <a
             href="/"
-            class="flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
           >
             <BarChart2Icon />
             <span>Statistikk</span>
@@ -76,7 +97,7 @@
         <li>
           <a
             href="/"
-            class="flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
           >
             <InfoIcon />
             <span>Om</span>

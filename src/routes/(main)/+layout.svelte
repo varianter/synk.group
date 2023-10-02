@@ -6,7 +6,7 @@
 </script>
 
 <div class="relative flex h-full flex-col bg-brand-beige font-serif font-light">
-  <Header playlists={data.playlists} />
+  <Header playlists={data.playlists} groupInfo={data.groupInfo} />
 
   <main class="grow-1 h-full">
     <slot />

@@ -2,9 +2,10 @@
   import UserIcon from '$lib/icons/UserIcon.svelte';
   import SlideInWrapper from '$lib/SlideInWrapper.svelte';
   import MainNavigation from '$lib/MainNavigation.svelte';
-  import type { Playlist } from '$lib/types';
+  import type { GroupInfo, Playlist } from '$lib/types';
 
   export let playlists: Playlist[];
+  export let groupInfo: GroupInfo;
 
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
@@ -19,13 +20,13 @@
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-12">
       <SlideInWrapper>
-        <MainNavigation slot="content" {playlists} />
+        <MainNavigation slot="content" {playlists} {groupInfo} />
       </SlideInWrapper>
 
       <div>
         <span class="font-medium">Synk.</span>
         <!-- Auto-formatting adds a whitespace, offset with margin. -->
-        <span class="-ml-2">Norge</span>
+        <span class="-ml-2">{groupInfo.name}</span>
       </div>
     </div>
 
