@@ -2,7 +2,13 @@
   export let color = '#0F7A43';
 </script>
 
-<svg width="439" height="200" viewBox="0 0 584 266" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg
+  width="439"
+  height="200"
+  viewBox="0 0 584 266"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <g clip-path="url(#clip0_3429_21377)">
     <path
       d="M523.794 0L60.2062 0C26.9552 0 0 27.0664 0 60.4545L0 205.545C0 238.934 26.9552 266 60.2062 266H523.794C557.045 266 584 238.934 584 205.545V60.4545C584 27.0664 557.045 0 523.794 0Z"
