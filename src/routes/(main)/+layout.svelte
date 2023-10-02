@@ -1,9 +1,12 @@
-<script>
+<script lang="ts">
   import Header from '$lib/Header.svelte';
+  import type { LayoutData } from './$types';
+
+  export let data: LayoutData;
 </script>
 
 <div class="relative flex h-full flex-col bg-brand-beige font-serif font-light">
-  <Header />
+  <Header playlists={data.playlists} groupInfo={data.groupInfo} />
 
   <main class="grow-1 h-full">
     <slot />

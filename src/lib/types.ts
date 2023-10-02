@@ -24,3 +24,15 @@ export type Playlist = {
 };
 
 export type PlaylistWithoutTracks = Omit<Playlist, 'tracks'>;
+
+export type GroupInfo = {
+  id: string;
+  name: string;
+  numberOfMembers: number;
+  numberOfTracks: number;
+  favoriteTrack: {
+    title: string;
+    numberOfPlays: number;
+  } | null;
+  creationDate: string | undefined;
+};

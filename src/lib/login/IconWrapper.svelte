@@ -22,7 +22,13 @@
 </script>
 
 {#if show}
-  <div class="absolute" style="transform: rotate({rotation}deg); top: {top}%; left: {left}%">
-    <svelte:component this={Icon} color={color.length ? color : colors[colorIndex]} />
+  <div
+    class="absolute"
+    style="transform: rotate({rotation}deg); top: {top}%; left: {left}%"
+  >
+    <svelte:component
+      this={Icon}
+      color={color.length ? color : colors[colorIndex]}
+    />
   </div>
 {/if}
