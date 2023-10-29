@@ -4,6 +4,7 @@
   import { writable } from 'svelte/store';
   import { fade } from 'svelte/transition';
   import type { Track } from '$lib/types';
+  import { currentPreview } from '$lib/stores';
 
   export let track: Track;
   export let index: number;
@@ -47,6 +48,11 @@
         $hoveringPreview = false;
       }}
       on:click={() => {
+        if ($currentPreview && $currentPreview !== audio) {
+          $currentPreview.pause();
+        }
+        $currentPreview = audio;
+
         if (audio.paused) {
           $hoveringPreview = false;
           audio.play();
