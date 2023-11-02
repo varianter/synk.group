@@ -3,6 +3,7 @@
   import random from '$lib/utils/random';
   import clamp from '$lib/utils/clamp';
   import { goto } from '$app/navigation';
+  import { darkenHexHsl } from '$lib/utils/hex-to-hsl';
 
   export let playlists = [];
 
@@ -47,6 +48,7 @@
 
     // Create an array of ball objects with x, y, radius, color, and velocity properties
     const balls = createBalls();
+    const originalBallColors = balls.map((ball) => ball.color);
     const gravity = 0.075;
     const bounceFactor = 0.45;
 
@@ -214,8 +216,11 @@
         const dx = ball.x - mouseX;
         const dy = ball.y - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
+        ball.color = originalBallColors[i];
         if (distance <= ball.r) {
           cursor = 'pointer';
+          // TODO: Figure out why the color persists when hovering over a touching neighbour.
+          ball.color = darkenHexHsl(originalBallColors[i], 5);
           selectedBall = ball;
           break;
         }
