@@ -15,7 +15,7 @@
 <slot name="button" toggleSlideIn={() => (showSlideIn = !showSlideIn)}>
   <button
     on:click={() => (showSlideIn = !showSlideIn)}
-    class="rounded-xl p-3 transition hover:bg-black/10"
+    class="rounded-xl p-3 transition hover:bg-black/8"
   >
     <MenuIcon size="20" />
   </button>

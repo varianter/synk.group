@@ -3,6 +3,9 @@ export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
     extend: {
+      opacity: {
+        8: '8%'
+      },
       colors: {
         'brand-beige': '#F1EDDF',
         'danger-red': '#B23A3A'

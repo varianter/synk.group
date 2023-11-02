@@ -54,7 +54,7 @@
           <li>
             <a
               href="/{playlist.id}"
-              class="group flex w-full cursor-pointer items-center justify-between gap-x-3 rounded-xl px-4 py-3 font-sans font-medium hover:bg-black/10 focus:bg-black/10"
+              class="group flex w-full cursor-pointer items-center justify-between gap-x-3 rounded-xl px-4 py-3 font-sans font-medium hover:bg-black/8 focus:bg-black/8"
             >
               <span class="h-6 w-6">{index + 1}</span>
               <span>{playlist.name}</span>
