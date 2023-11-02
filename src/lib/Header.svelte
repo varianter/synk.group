@@ -16,7 +16,7 @@
   const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
-<header class="grid items-center p-8 text-3xl">
+<header class="grid items-center p-8 text-3xl font-light">
   <nav class="text-wonky flex justify-between">
     <div class="flex items-center gap-x-12">
       <SlideInWrapper>

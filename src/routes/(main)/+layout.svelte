@@ -9,7 +9,7 @@
   <title>Synk.{data.groupInfo.name}</title>
 </svelte:head>
 
-<div class="text-serif relative flex h-full flex-col bg-brand-beige font-light">
+<div class="text-serif relative flex h-full flex-col bg-brand-beige">
   <Header playlists={data.playlists} groupInfo={data.groupInfo} />
 
   <main class="grow-1 h-full">
