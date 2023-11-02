@@ -5,6 +5,10 @@
   export let data: LayoutData;
 </script>
 
+<svelte:head>
+  <title>Synk.{data.groupInfo.name}</title>
+</svelte:head>
+
 <div class="text-serif relative flex h-full flex-col bg-brand-beige font-light">
   <Header playlists={data.playlists} groupInfo={data.groupInfo} />
 
