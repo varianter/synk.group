@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       opacity: {
+        4: '4%',
         8: '8%'
       },
       colors: {

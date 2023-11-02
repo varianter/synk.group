@@ -7,7 +7,7 @@
   let duration = 300;
   let showSlideIn = false;
 
-  function closeOnEsc(e) {
+  function closeOnEsc(e: KeyboardEvent) {
     if (e.key === 'Escape') showSlideIn = false;
   }
 </script>
@@ -15,7 +15,7 @@
 <slot name="button" toggleSlideIn={() => (showSlideIn = !showSlideIn)}>
   <button
     on:click={() => (showSlideIn = !showSlideIn)}
-    class="rounded-xl p-3 transition hover:bg-black/8"
+    class="z-10 rounded-xl p-3 transition hover:bg-black/8"
   >
     <MenuIcon size="20" />
   </button>
@@ -31,7 +31,7 @@
     class="absolute left-0 top-0 z-40 h-full w-full bg-black opacity-60"
   />
   <div
-    transition:fly={{ x: fromRight ? '100%' : '-100%', duration }}
+    transition:fly={{ x: fromRight ? '100%' : '-100%', duration, opacity: 100 }}
     use:focusTrap
     class="absolute top-5 z-50 flex h-[calc(100vh-2.5rem)] items-start gap-4"
     class:left-5={!fromRight}
