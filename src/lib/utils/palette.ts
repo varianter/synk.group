@@ -10,4 +10,4 @@ export const colors = [
   '#082461'
 ];
 
-export const defaultColor = '#0662BA';
+export const defaultColor = '#424242';

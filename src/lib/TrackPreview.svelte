@@ -5,6 +5,7 @@
   import { fade } from 'svelte/transition';
   import type { Track } from '$lib/types';
   import { currentPreview } from '$lib/stores';
+  import { darkenHexHsl } from '$lib/utils/hex-to-hsl';
 
   export let track: Track;
   export let index: number;
@@ -39,8 +40,10 @@
 {#if showNumber}
   <div transition:fade class="grow-1 flex h-full w-full items-end justify-end">
     <div
-      style="background-color: {track.color}"
-      class="{className}  relative grid h-40 w-40 place-content-center rounded-full text-5xl transition-all hover:cursor-pointer"
+      style="background-color: {$hoveringPreview
+        ? darkenHexHsl(track.color, 5)
+        : track.color}"
+      class="{className} relative grid h-40 w-40 place-content-center rounded-full text-5xl transition-all hover:cursor-pointer hover:bg-blue-400"
       on:mouseenter={() => {
         $hoveringPreview = true;
       }}
@@ -54,11 +57,9 @@
         $currentPreview = audio;
 
         if (audio.paused) {
-          $hoveringPreview = false;
           audio.play();
           audio.volume = 0.1;
         } else {
-          $hoveringPreview = true;
           audio.pause();
         }
       }}

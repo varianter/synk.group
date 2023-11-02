@@ -3,6 +3,7 @@
   import CircleSeparator from '$lib/icons/CircleSeparator.svelte';
   import type { Track } from '$lib/types';
   import { tweened } from 'svelte/motion';
+  import { darkenHexHsl } from '$lib/utils/hex-to-hsl';
 
   export let track: Track;
 
@@ -45,13 +46,10 @@
 </script>
 
 <div
-  style="background-color: {track.color}"
+  style="background-color: {darkenHexHsl(track.color, 5)}"
   class="absolute bottom-0 left-0 right-0 z-0 overflow-hidden rounded-b-xl"
   bind:clientWidth={parentWidth}
 >
-  <!-- Overlay to darken the background color. -->
-  <div class="absolute bottom-0 left-0 right-0 top-0 bg-black/[0.16]" />
-
   <div
     class="flex w-[fit-content] items-center gap-1.5 whitespace-nowrap p-4 pt-8 font-sans text-lg font-normal"
     bind:clientWidth={metadataWidth}

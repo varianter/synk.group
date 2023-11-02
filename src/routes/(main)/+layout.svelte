@@ -5,7 +5,7 @@
   export let data: LayoutData;
 </script>
 
-<div class="relative flex h-full flex-col bg-brand-beige font-serif font-light">
+<div class="text-serif relative flex h-full flex-col bg-brand-beige font-light">
   <Header playlists={data.playlists} groupInfo={data.groupInfo} />
 
   <main class="grow-1 h-full">

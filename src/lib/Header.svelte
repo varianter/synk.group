@@ -17,14 +17,14 @@
 </script>
 
 <header class="z-10 grid items-center p-8 text-3xl">
-  <nav class="flex justify-between">
-    <div class="flex items-center gap-x-12">
+  <nav class="text-wonky flex justify-between">
+    <div class=" flex items-center gap-x-12">
       <SlideInWrapper>
         <MainNavigation slot="content" {playlists} {groupInfo} />
       </SlideInWrapper>
 
       <div>
-        <span class="font-medium">Synk.</span>
+        <span class="font-bold">Synk.</span>
         <!-- Auto-formatting adds a whitespace, offset with margin. -->
         <span class="-ml-2">{groupInfo.name}</span>
       </div>
