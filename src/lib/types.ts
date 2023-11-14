@@ -36,3 +36,15 @@ export type GroupInfo = {
   } | null;
   creationDate: string | undefined;
 };
+
+export type Ball = {
+  x: number;
+  y: number;
+  r: number;
+  color: string;
+  vx: number;
+  vy: number;
+  mass: number;
+  text: string;
+  id: string;
+};
