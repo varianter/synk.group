@@ -40,7 +40,7 @@
     }, 1000);
   }}
 >
-  <p class="text-body-normal rounded-full bg-black px-3 py-0.5 text-white">
+  <p class="text-body-normal rounded-full bg-black px-3 py-1 text-white">
     {track.genre}
   </p>
 
