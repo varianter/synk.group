@@ -43,7 +43,7 @@
       style="background-color: {$hoveringPreview
         ? darkenHexHsl(track.color, 5)
         : track.color}"
-      class="{className} relative grid h-40 w-40 place-content-center rounded-full text-5xl transition-all hover:cursor-pointer hover:bg-blue-400"
+      class="{className} text-wonky-big relative grid h-40 w-40 place-content-center rounded-full transition-all hover:cursor-pointer hover:bg-blue-400"
       on:mouseenter={() => {
         $hoveringPreview = true;
       }}

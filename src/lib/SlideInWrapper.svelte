@@ -17,7 +17,7 @@
     on:click={() => (showSlideIn = !showSlideIn)}
     class="z-10 rounded-xl p-3 transition hover:bg-black/8"
   >
-    <MenuIcon size="20" />
+    <MenuIcon />
   </button>
 </slot>
 
@@ -48,7 +48,7 @@
       title="Lukk meny"
       class="z-50 w-fit overflow-hidden rounded-xl p-3 transition hover:bg-white/10 focus:bg-white/10"
     >
-      <XIcon size="20" class="text-white" />
+      <XIcon class="text-white" />
     </button>
   </div>
 {/if}

@@ -13,7 +13,7 @@
   function resetCounter() {
     clearTimeout(currentTimeout);
     counter = 0;
-    currentTimeout = setTimeout(incrementCounter, 8000);
+    currentTimeout = setTimeout(incrementCounter, 4000);
   }
 
   function incrementCounter() {
@@ -25,7 +25,7 @@
     counter += 1;
   }
 
-  currentTimeout = setTimeout(incrementCounter, 8000);
+  currentTimeout = setTimeout(incrementCounter, 4000);
 
   let ready = false;
   onMount(() => (ready = true));
@@ -38,7 +38,7 @@
 >
   <LoginHeader />
 
-  <main class="relative grid h-full w-full place-content-center p-8">
+  <main class="relative grid h-full w-full place-content-center p-8 pb-[9rem]">
     {#if ready}
       <h1
         in:fly={{
@@ -46,7 +46,7 @@
           duration: 350,
           y: 20
         }}
-        class="text-wonky text-center text-6xl font-bold"
+        class="text-wonky-jumbo text-center"
       >
         Vær sammen om musikken
       </h1>
@@ -56,7 +56,7 @@
           duration: 350,
           y: 20
         }}
-        class="mt-8 text-center"
+        class="mt-8 text-center text-black/[0.6]"
       >
         Opprett eller bli med i en gruppe i dag. Og ja, du kan bli med i flere
         grupper!

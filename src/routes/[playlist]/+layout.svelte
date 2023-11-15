@@ -14,7 +14,7 @@
 
 <div
   style="background-color: {$playlistBackgroundColor}; transition: background-color 2s cubic-bezier(0.12, 0, 0, 1);"
-  class="flex h-full flex-col font-bold text-white"
+  class="text-wonky-normal flex h-full flex-col text-white"
 >
   <PlaylistHeader playlistName={data.playlist.name} />
   <main class="grow-1 h-full">

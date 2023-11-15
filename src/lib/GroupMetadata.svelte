@@ -2,12 +2,8 @@
   import GroupMetadataCard from '$lib/GroupMetadataCard.svelte';
 </script>
 
-<div class="hide-scrollbar flex gap-4 self-start overflow-x-auto p-8 pt-0">
+<div class="hide-scrollbar z-10 flex gap-4 self-start overflow-x-auto p-8 pt-0">
   <GroupMetadataCard label="Mest spilte sjanger" value="Hip-Hop/Rap" />
-  <GroupMetadataCard
-    label="Mest spilte sjanger sjanger sjanger"
-    value="Hip-Hop/Rap Rap Rap Rap"
-  />
   <GroupMetadataCard label="Mest spilte sjanger" value="Hip-Hop/Rap" />
   <GroupMetadataCard label="Mest spilte sjanger" value="Hip-Hop/Rap" />
   <GroupMetadataCard label="Mest spilte" value="Hip" />

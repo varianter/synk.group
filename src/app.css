@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;700&');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -11,11 +11,91 @@
 }
 
 @layer utilities {
-    .text-serif {
+    .text-body,
+    .text-body-mini,
+    .text-body-small,
+    .text-body-normal,
+    .text-body-normal,
+    .text-body-big,
+    .text-body-jumbo {
         font-family: Inter, sans-serif;
+        font-weight: 400;
     }
 
-    .text-wonky {
+    .text-body-mini {
+        font-size: 0.75rem;
+        line-height: 1.25rem;
+    }
+
+    .text-body-small {
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+    }
+
+    .text-body-normal {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    .text-body-medium,
+    .text-body-medium-600 {
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+    }
+
+    .text-body-medium-600 {
+        font-weight: 600;
+    }
+
+    .text-body-big,
+    .text-body-big-600 {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    }
+
+    .text-body-big-600 {
+        font-weight: 600;
+    }
+
+
+    .text-wonky,
+    .text-wonky-mini,
+    .text-wonky-small,
+    .text-wonky-normal,
+    .text-wonky-normal,
+    .text-wonky-big,
+    .text-wonky-jumbo {
         font-family: Fraunces, serif;
+        font-weight: 700;
+    }
+
+    .text-wonky-mini {
+        font-size: 1rem;
+        line-height: 1.25rem;
+    }
+
+    .text-wonky-small {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+    }
+
+    .text-wonky-normal,
+    .text-wonky-normal-300 {
+        font-size: 1.625rem;
+        line-height: 2rem;
+    }
+
+    .text-wonky-normal-300 {
+        font-weight: 300;
+    }
+
+    .text-wonky-big {
+        font-size: 3.25rem;
+        line-height: 4.25rem;
+    }
+
+    .text-wonky-jumbo {
+        font-size: 4.25rem;
+        line-height: 5.5rem;
     }
 }

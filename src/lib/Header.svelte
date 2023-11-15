@@ -1,5 +1,4 @@
 <script lang="ts">
-  import UserIcon from '$lib/icons/UserIcon.svelte';
   import SlideInWrapper from '$lib/SlideInWrapper.svelte';
   import MainNavigation from '$lib/MainNavigation.svelte';
   import type { GroupInfo, Playlist } from '$lib/types';
@@ -16,9 +15,9 @@
   const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
-<header class="grid items-center p-8 text-3xl font-light">
+<header class="text-wonky-normal grid items-center p-8 font-light">
   <nav class="text-wonky flex justify-between">
-    <div class="flex items-center gap-x-12">
+    <div class="flex items-center gap-x-8">
       <SlideInWrapper>
         <MainNavigation slot="content" {playlists} {groupInfo} />
       </SlideInWrapper>
@@ -26,13 +25,22 @@
       <div>
         <span class="font-bold">Synk.</span>
         <!-- Auto-formatting adds a whitespace, offset with margin. -->
-        <span class="-ml-2">{groupInfo.name}</span>
+        <span class="text-wonky-normal-300 -ml-2">{groupInfo.name}</span>
       </div>
     </div>
 
-    <div class="flex items-center gap-x-12">
-      <span>{formattedDate}</span>
-      <UserIcon />
+    <div class="flex items-center gap-x-8">
+      <span class="text-wonky-normal-300">{formattedDate}</span>
+      <SlideInWrapper fromRight>
+        <button
+          class="z-10 rounded-xl p-3 transition hover:bg-black/8"
+          let:toggleSlideIn
+          on:click={toggleSlideIn}
+          slot="button"
+        >
+          <span class="font-bold">M</span>
+        </button>
+      </SlideInWrapper>
     </div>
   </nav>
 </header>

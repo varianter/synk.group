@@ -51,7 +51,7 @@
   bind:clientWidth={parentWidth}
 >
   <div
-    class="flex w-[fit-content] items-center gap-1.5 whitespace-nowrap p-4 pt-8 font-sans text-lg font-normal"
+    class="text-body-normal flex w-[fit-content] items-center gap-1.5 whitespace-nowrap p-4 pt-8"
     bind:clientWidth={metadataWidth}
     style="transform: translateX(-{$transformTween}px)"
   >
@@ -62,7 +62,7 @@
     <CircleSeparator />
 
     <span class="text-white text-opacity-70">
-      Utgitt i {track.releaseDate?.substring(0, 4)}
+      {track.releaseDate?.substring(0, 4)}
     </span>
 
     <CircleSeparator />

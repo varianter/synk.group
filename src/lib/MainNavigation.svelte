@@ -24,18 +24,24 @@
   }
 </script>
 
-<h2 class="leading-0 p-8 pb-6 text-3xl font-medium">Hei, {groupInfo.name}</h2>
+<h2 class="leading-0 text-wonky-normal p-8 pb-6">Hei, {groupInfo.name}</h2>
 <div
   use:shadowOnScroll
-  class="overflow-y-auto scroll-smooth p-4 pt-0 text-base"
+  class="text-body-normal overflow-y-auto scroll-smooth p-4 pt-0"
 >
   <div>
     <div class="p-4 pt-0">
-      <p class="mb-3 leading-6">
+      <p class="mb-3 leading-6 text-black/[0.6]">
         <span>
-          Siden {formatDate(groupInfo.creationDate)} har gruppen vokst seg til {groupInfo.numberOfMembers}
-          personer, og i løpet av denne tiden har dere totalt hørt på {groupInfo.numberOfTracks}
-          låter.
+          Siden {formatDate(groupInfo.creationDate)} har gruppen vokst seg til
+          <span class="font-semibold text-black">
+            {groupInfo.numberOfMembers} personer,
+          </span>
+          og i løpet av denne tiden har dere totalt hørt på
+          <span class="font-semibold text-black">
+            {groupInfo.numberOfTracks}
+            låter.
+          </span>
         </span>
         {#if groupInfo.favoriteTrack}
           <span>
@@ -50,11 +56,11 @@
     </div>
     <nav>
       <ol class="grid h-fit gap-y-1 border-b border-t border-black/20 py-4">
-        {#each playlists as playlist, index}
+        {#each playlists.slice(1) as playlist, index}
           <li>
             <a
               href="/{playlist.id}"
-              class="group flex w-full cursor-pointer items-center justify-between gap-x-3 rounded-xl px-4 py-3 font-sans font-medium hover:bg-black/8 focus:bg-black/8"
+              class="text-body-medium-600 group flex w-full cursor-pointer items-center justify-between gap-x-3 rounded-xl px-4 py-3 hover:bg-black/8 focus:bg-black/8"
             >
               <span class="h-6 w-6">{index + 1}</span>
               <span>{playlist.name}</span>
@@ -69,17 +75,20 @@
       <ul class="grid h-full gap-y-1 py-4">
         <li>
           <a
-            href="/"
-            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            href="/{playlists[0].id}"
+            class="text-body-medium-600 group flex w-full gap-x-3 rounded-xl px-4 py-3 hover:bg-black/8 focus:bg-black/8"
           >
             <StarIcon />
-            <span>Topp 20</span>
+            <span>{playlists[0].name}</span>
+            <ArrowRightIcon
+              class="ml-auto opacity-0 group-focus-within:opacity-100 group-hover:opacity-100"
+            />
           </a>
         </li>
         <li>
           <a
             href="/"
-            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="text-body-medium pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 text-gray-400"
           >
             <UserPlusIcon />
             <span>Del gruppe</span>
@@ -88,7 +97,7 @@
         <li>
           <a
             href="/"
-            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="text-body-medium pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 text-gray-400"
           >
             <BarChart2Icon />
             <span>Statistikk</span>
@@ -97,7 +106,7 @@
         <li>
           <a
             href="/"
-            class="pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-gray-400"
+            class="text-body-medium pointer-events-none flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 text-gray-400"
           >
             <InfoIcon />
             <span>Om</span>
@@ -108,7 +117,7 @@
       <div class="mb-4 h-[1px] w-full bg-black/20" />
 
       <button
-        class="flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 font-sans font-medium text-danger-red/50"
+        class="text-body-medium flex w-full cursor-not-allowed gap-x-3 rounded-xl px-4 py-3 text-danger-red/50"
       >
         <LogOutIcon />
         <span>Forlat gruppe</span>

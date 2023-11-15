@@ -1,9 +1,9 @@
 <script lang="ts">
   import random from '$lib/utils/random';
-  import { colors } from '$lib/utils/palette';
+  import { stickerColors } from '$lib/utils/palette';
   import { onMount, type ComponentType } from 'svelte';
 
-  export let color: string = '';
+  export let color = '';
 
   export let Icon: ComponentType;
   export let top: number;
@@ -15,7 +15,7 @@
 
   onMount(() => {
     rotation = random(-10, 10);
-    colorIndex = random(0, colors.length - 1);
+    colorIndex = random(0, stickerColors.length - 1);
 
     show = true;
   });
@@ -28,7 +28,7 @@
   >
     <svelte:component
       this={Icon}
-      color={color.length ? color : colors[colorIndex]}
+      color={color.length ? color : stickerColors[colorIndex]}
     />
   </div>
 {/if}

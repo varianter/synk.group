@@ -40,7 +40,7 @@
     }, 1000);
   }}
 >
-  <p class="rounded-full bg-black px-3 py-0.5 font-sans font-normal text-white">
+  <p class="text-body-normal rounded-full bg-black px-3 py-0.5 text-white">
     {track.genre}
   </p>
 
@@ -51,13 +51,13 @@
       style="background-color: {track.color}"
       class="relative z-10 col-span-full row-span-full flex w-full flex-col gap-4 rounded-xl p-4 transition-all group-hover:mb-14"
     >
-      <p class="text-xl font-normal text-white/70">
+      <p class="text-body-big text-white/70">
         {_.sortBy(track.artists, 'order')
           .map((artist) => artist.name)
           .join(', ')}
       </p>
 
-      <p class="text-wonky relative break-words text-5xl leading-tight">
+      <p class="text-wonky text-wonky-big relative break-words leading-tight">
         {track.title}
       </p>
     </div>

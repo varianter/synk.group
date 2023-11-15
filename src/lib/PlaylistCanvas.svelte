@@ -5,6 +5,7 @@
   import { goto } from '$app/navigation';
   import { darkenHexHsl } from '$lib/utils/hex-to-hsl.js';
   import type { Ball, Playlist } from '$lib/types';
+  import { writable } from 'svelte/store';
 
   export let playlists: Playlist[] = [];
 
@@ -49,6 +50,8 @@
 
   let canvas: HTMLCanvasElement;
 
+  const stopIkkeMobb = writable(false);
+
   onMount(() => {
     // Get the canvas element and its context
     // const canvas: HTMLCanvasElement = document.getElementById('myCanvas');
@@ -56,7 +59,7 @@
 
     canvas.width = clientWidth;
     canvas.height = clientHeight;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
     // Create an array of ball objects with x, y, radius, color, and velocity properties
     const balls = createBalls();
@@ -155,6 +158,23 @@
 
     // Handle ball clicks
     function handleBallClick(ball: Ball) {
+      // const imgData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
+      // console.log('');
+      //
+      // console.log('imgData', imgData);
+      // $stopIkkeMobb = true;
+      //
+      // setTimeout(() => {
+      //   ctx?.clearRect(0, 0, canvas.width, canvas.height);
+      // }, 2000);
+      //
+      // setTimeout(() => {
+      //   if (imgData) {
+      //     $stopIkkeMobb = false;
+      //     ctx?.putImageData(imgData, 0, 0);
+      //     requestAnimationFrame(updateCanvas);
+      //   }
+      // }, 4000);
       // TOOD: Update to `/playlist/${ball.id}`
       goto(`/${ball.id}`);
     }
@@ -294,7 +314,7 @@
         checkBallCollisions();
       }
 
-      requestAnimationFrame(updateCanvas);
+      if (!$stopIkkeMobb) requestAnimationFrame(updateCanvas);
     }
 
     // Start the animation

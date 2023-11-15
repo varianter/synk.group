@@ -1,14 +1,14 @@
 import SynkIcon from '$lib/icons/SynkIcon.svelte';
 import SynkLargeIcon from '$lib/icons/SynkLargeIcon.svelte';
 import IconWrapper from '$lib/login/IconWrapper.svelte';
-import { colors } from './palette';
+import { stickerColors } from './palette';
 import random from './random';
 import shuffle from 'lodash.shuffle';
 
 export default function generateStickers() {
-  const numberOfStickers = colors.length;
+  const numberOfStickers = stickerColors.length;
   const stickers = [];
-  const shuffledColors = shuffle(colors);
+  const shuffledColors = shuffle(stickerColors);
 
   for (let i = 0; i < numberOfStickers; i++) {
     const large = random(0, 100) > 50;

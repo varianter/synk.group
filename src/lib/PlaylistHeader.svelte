@@ -11,16 +11,16 @@
   const formattedDate = date.toLocaleDateString('nb-NO', options);
 </script>
 
-<header class="text-wonky grid items-center p-8 pb-4 text-3xl">
+<header class="text-wonky-normal grid items-center p-8 pb-4">
   <nav class="flex justify-between">
     <div class="flex items-center gap-x-8">
       <a class="rounded-xl p-3 transition hover:bg-white/10" href="/">
-        <ArrowLeftIcon size="20" />
+        <ArrowLeftIcon />
       </a>
       <div>{playlistName}</div>
     </div>
 
-    <div class="text flex items-center gap-x-12 font-light text-white">
+    <div class="text-wonky-normal-300 flex items-center gap-x-12 text-white">
       <span>{formattedDate}</span>
     </div>
   </nav>
