@@ -30,7 +30,7 @@
       const radius =
         playlist.name === 'Top 10'
           ? 100
-          : clamp(1200 * playlist.score, 60, 200);
+          : clamp(canvas.width * playlist.score, 50, 250);
       const mass = radius;
       const vy = (radius / 100) * 5;
 
